@@ -31,6 +31,11 @@
             from, to { border-color: transparent }
             50% { border-color: white; }
         }
+        
+        /* 타이핑 완료 시 커서 숨기기 */
+        .typing-complete {
+            border-right: none !important;
+        }
 
         .section-header {
             position: relative;
@@ -149,13 +154,19 @@
         const subtitle = "그 모든 감정의 기록을 새깁니다.";
         const heroSubtitle = document.getElementById('hero-subtitle');
         let i = 0;
+        let isTyping = true; // 타이핑 중인지 확인하는 변수
 
-        // 타자기 효과를 위한 함수
+        // 타이핑 효과를 위한 함수
         function typeWriter() {
-            if (i < subtitle.length) {
+            if (isTyping && i < subtitle.length) {
                 heroSubtitle.textContent += subtitle.charAt(i);
                 i++;
                 setTimeout(typeWriter, 50);
+            } else {
+                isTyping = false;
+                // 타이핑이 끝나면 커서 효과 제거
+                heroSubtitle.classList.remove('border-r-2');
+                heroSubtitle.classList.add('typing-complete');
             }
         }
         
