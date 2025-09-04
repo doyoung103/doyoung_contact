@@ -19,7 +19,7 @@
             overflow: hidden;
             white-space: nowrap;
             animation: typing 3.5s steps(40, end) forwards,
-                       blink-caret 0.75s step-end infinite;
+                        blink-caret 0.75s step-end infinite;
         }
 
         @keyframes typing {
@@ -96,7 +96,6 @@
     </style>
 </head>
 <body class="p-4 md:p-8" onload="window.scrollTo(0, 0);">
-    <!-- 헤더 섹션 -->
     <header class="text-center py-6 mb-12">
         <nav class="flex flex-col sm:flex-row justify-between items-center max-w-5xl mx-auto space-y-4 sm:space-y-0">
             <a href="#" class="text-2xl font-bold tracking-wider hover:text-white transition-colors duration-300">도영[圖永; 영원히 남는 그림]</a>
@@ -109,13 +108,11 @@
     </header>
 
     <main class="max-w-5xl mx-auto">
-        <!-- 메인 히어로 섹션 -->
         <section class="h-[60vh] flex flex-col items-center justify-center text-center">
             <h1 class="text-4xl md:text-6xl font-bold tracking-wide">검은 숲의 이야기들</h1>
             <p id="hero-subtitle" class="text-lg md:text-2xl mt-4 typing-effect border-r-2 border-solid border-white pr-1"></p>
         </section>
 
-        <!-- 소개 섹션 -->
         <section id="about" class="py-16 text-center">
             <h2 class="text-3xl font-bold section-header">ABOUT</h2>
             <p class="max-w-3xl mx-auto text-gray-400 leading-7">
@@ -126,42 +123,34 @@
             </p>
         </section>
 
-        <!-- 포트폴리오 섹션 -->
         <section id="portfolio" class="py-16">
             <h2 class="text-3xl font-bold section-header text-center">PORTFOLIO</h2>
             <div class="portfolio-grid mt-8">
-                <!-- 고래 작품 (영상 추가) -->
-                <div class="portfolio-item group" onmouseenter="this.querySelector('video').play()" onmouseleave="this.querySelector('video').pause()">
+                <div class="portfolio-item group">
                     <img src="https://doyoung103.github.io/doyoung_contact/whale.png" alt="고래 타투 작품" class="rounded-lg absolute top-0 left-0 w-full h-full object-cover z-10">
                     <video src="https://doyoung103.github.io/doyoung_contact/whale_video.mp4" loop muted playsinline class="rounded-lg portfolio-video absolute top-0 left-0 w-full h-full object-cover"></video>
                 </div>
-                <!-- 여우 작품 -->
                 <div class="portfolio-item">
                     <img src="https://doyoung103.github.io/doyoung_contact/fox.png" alt="여우 타투 작품" class="rounded-lg">
                 </div>
-                <!-- 가오리 작품 (영상 추가) -->
-                <div class="portfolio-item group" onmouseenter="this.querySelector('video').play()" onmouseleave="this.querySelector('video').pause()">
+                <div class="portfolio-item group">
                     <img src="https://doyoung103.github.io/doyoung_contact/ray.png" alt="가오리 타투 작품" class="rounded-lg absolute top-0 left-0 w-full h-full object-cover z-10">
                     <video src="https://doyoung103.github.io/doyoung_contact/ray_video.mp4" loop muted playsinline class="rounded-lg portfolio-video absolute top-0 left-0 w-full h-full object-cover"></video>
                 </div>
-                <!-- 물고기 작품 (영상 추가) -->
-                <div class="portfolio-item group" onmouseenter="this.querySelector('video').play()" onmouseleave="this.querySelector('video').pause()">
+                <div class="portfolio-item group">
                     <img src="https://doyoung103.github.io/doyoung_contact/fish.png" alt="물고기 타투 작품" class="rounded-lg absolute top-0 left-0 w-full h-full object-cover z-10">
                     <video src="https://doyoung103.github.io/doyoung_contact/fish_video.mp4" loop muted playsinline class="rounded-lg portfolio-video absolute top-0 left-0 w-full h-full object-cover"></video>
                 </div>
-                <!-- 늑대 작품 (영상 추가) -->
-                <div class="portfolio-item group" onmouseenter="this.querySelector('video').play()" onmouseleave="this.querySelector('video').pause()">
+                <div class="portfolio-item group">
                     <img src="https://doyoung103.github.io/doyoung_contact/wolf.png" alt="늑대 타투 작품" class="rounded-lg absolute top-0 left-0 w-full h-full object-cover z-10">
                     <video src="https://doyoung103.github.io/doyoung_contact/wolf_video.mp4" loop muted playsinline class="rounded-lg portfolio-video absolute top-0 left-0 w-full h-full object-cover"></video>
                 </div>
-                <!-- 새 작품 -->
                 <div class="portfolio-item">
                     <img src="https://doyoung103.github.io/doyoung_contact/bird.png" alt="새 타투 작품" class="rounded-lg">
                 </div>
             </div>
         </section>
 
-        <!-- 문의 섹션 -->
         <section id="contact" class="py-16 text-center">
             <h2 class="text-3xl font-bold section-header">CONTACT</h2>
             <p class="max-w-2xl mx-auto text-gray-400">
@@ -196,7 +185,24 @@
             }
         }
         
-        document.addEventListener('DOMContentLoaded', typeWriter);
+        document.addEventListener('DOMContentLoaded', () => {
+            typeWriter(); // 페이지 로드 후 타이핑 효과 시작
+
+            // 모든 포트폴리오 아이템에 이벤트 리스너 추가
+            const portfolioItems = document.querySelectorAll('.portfolio-item.group');
+            portfolioItems.forEach(item => {
+                const video = item.querySelector('video');
+                if (video) {
+                    item.addEventListener('mouseenter', () => {
+                        video.play();
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        video.pause();
+                        video.currentTime = 0; // 마우스 벗어날 때 비디오를 처음으로 돌림
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
