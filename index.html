@@ -77,10 +77,10 @@
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-8" onload="window.scrollTo(0, 0);">
     <!-- 헤더 섹션 -->
     <header class="text-center py-6 mb-12">
-        <nav class="flex justify-between items-center max-w-5xl mx-auto">
+        <nav class="flex flex-col sm:flex-row justify-between items-center max-w-5xl mx-auto space-y-4 sm:space-y-0">
             <a href="#" class="text-2xl font-bold tracking-wider hover:text-white transition-colors duration-300">도영[圖永; 영원히 남는 그림]</a>
             <div class="space-x-4">
                 <a href="#about" class="hover:text-white transition-colors duration-300">소개</a>
@@ -154,9 +154,8 @@
         const subtitle = "그 모든 감정의 기록을 새깁니다.";
         const heroSubtitle = document.getElementById('hero-subtitle');
         let i = 0;
-        let isTyping = true; // 타이핑 중인지 확인하는 변수
+        let isTyping = true;
 
-        // 타이핑 효과를 위한 함수
         function typeWriter() {
             if (isTyping && i < subtitle.length) {
                 heroSubtitle.textContent += subtitle.charAt(i);
@@ -164,7 +163,6 @@
                 setTimeout(typeWriter, 50);
             } else {
                 isTyping = false;
-                // 타이핑이 끝나면 커서 효과 제거
                 heroSubtitle.classList.remove('border-r-2');
                 heroSubtitle.classList.add('typing-complete');
             }
